@@ -1,0 +1,13 @@
+allegro faktury manual
+
+zaszyfrowane pliki z q:\allegro\DATA_PLIKOW
+wrzucamy na deszyfranta luzem allegro j:\IT_DESZYFRANT\ALLEGRO\ nie do ¿adnego folderu ! 
+w wynikach mamy .zipy ktore wypakowywujemy do j:\!IT_TRANSAKCJE1\DANE\ALLEGRO\FAKTURY_NOWE\BAZY\
+
+ilosc .pdf z wypakowanych zipow powinna sie zgadzac z ta iloscia, co na mailu
+
+mozna wypieprzyc sobie raporty z zeszlego miesiaca + wyniki 
+
+edytujemy allegro_faktury_rola - data nadania zwykle na d+1 ( mozna zapytac ) 
+
+odpalamy allegro_faktury_rola  ze zmieniona data nadania

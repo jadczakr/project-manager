@@ -1,0 +1,395 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"  xmlns:th="http://www.thymeleaf.org" >
+<head>
+<title>Project Manager</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+  <link rel="icon" th:href="@{~/images/favicon.ico}" type="image/png">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" th:href="@{~/bootstrap/css/bootstrap.min.css}">
+  <!-- Material Design Bootstrap -->
+   <link rel="stylesheet" th:href="@{~/css/mdb.min.css}">
+<link rel="stylesheet" th:href="@{~/css/main.css}">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&amp;subset=latin-ext" rel="stylesheet">
+
+  <script type="text/javascript" th:src="@{js/jquery.min.js}"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" th:src="@{js/popper.min.js}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" th:src="@{js/mdb.min.js}"></script>
+  
+  
+<!--[if lt IE 9]>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+<![endif]-->
+
+
+</head>
+
+<body onLoad="klik();">
+<img th:src="@{~/images/logo3.png}" style="position:absolute;right:0" class="mt-5 p-5" >
+<header>
+
+<nav class="navbar navbar-expand-lg bg-dark">
+
+  <!-- Navbar brand -->
+<a class="navbar-brand text-white font-weight-bold" th:href="@{/daily-zlecenia}">Project manager</a>
+  <!-- Collapse button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Collapsible content -->
+  <div class="collapse navbar-collapse" id="basicExampleNav">
+
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+ <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">Projekty</a>
+        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" th:href="@{/add-project}">Dodaj...</a>
+          <a class="dropdown-item" th:href="@{/daily-zlecenia}">Dzisiejsze zlecenia</a>
+          <a class="dropdown-item" th:href="@{/moje-zlecenia}">Edytuj moje zlecenia</a>"
+          </div>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">Pracownik</a>
+        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" th:href="@{/urlop}">Dodaj urlop</a>
+          <a class="dropdown-item" th:href="@{/notatka}">Dodaj notatkę</a>
+        </div>
+      </li>
+       
+             <li class="nav-item">
+        <a class="nav-link text-white" th:href="@{/dziennik}">Dziennik</a>
+      </li>
+       
+      <li class="nav-item">
+        <a class="nav-link text-white" th:href="@{/archiwum}">Archiwum</a>
+      </li>
+      
+       <li class="nav-item">
+        <a class="nav-link text-white" href="https://mtt2.edcexpert.pl/" target="_blank">MTT2</a>
+      </li>
+      
+      
+      
+       <li class="nav-item">
+        <a class="nav-link text-white" href="https://kontakty.edcexpert.pl/" target="_blank">Kontakty EDC</a>
+      </li>
+
+
+       <li class="nav-item">
+        <a class="nav-link text-white" href="https://enadawca.edcexpert.pl/" target="_blank">E-nadawca</a>
+      </li>
+    </ul>
+    <span th:text="'Zalogowany jako: ' + ${uzytkownik}" class="text-right mr-3 text-light"></span>
+	<a th:href="@{/logout}">	<span th:text="'Wyloguj'" class="text-right mr-3 font-weight-bold text-white"></span></a>
+
+  </div>
+
+
+</nav>
+</header>
+
+
+
+<main>
+
+<div class="container">
+
+
+
+<div class="m-2">
+
+
+<h2 class="h2 text-center font-weight-bold p-0"></h2>
+
+</div>
+</div>
+<form method="POST" th:action="@{/save-project4}" th:object="${project}" enctype="multipart/form-data">
+<input type="hidden" th:field="*{id}" >
+<div class="col-4 rounded mx-auto mt-5 text-center border border-dark text-dark"><h4 class="h4">Dodawanie nowego projektu</h4></div>
+
+<div class="row mx-auto mt-5">
+	<div class="col-6  text-right mx-auto text-dark">Firma:</div>
+	<div class="col-6  text-left mx-auto"> 
+	 <select id="firma" th:field="*{firma}" class="form-control col-5" required>
+  	  	<option value="">Wybierz</option> 
+    	<option th:field="*{firma}" th:each="firm : ${firmy}" th:value="${firm}" th:text="${firm}"></option>
+    </select>
+</div>
+</div>
+
+
+<div class="row m-2 p-3">
+	<div class="col-6 text-right mx-auto text-dark">Nazwa zlecenia:</div>
+	<div class="col-6 text-left mx-auto">
+	<input type="text" id="nazwaZlecenia"  th:field="*{nazwaZlecenia}" name="nazwaZlecenia" class="form-control col-5"  required>
+	      
+     </div>
+</div>
+
+
+
+<div class="row m-2 p-3">
+
+	<div class="col-9 text-center mx-auto text-dark">
+
+<div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <label class="btn btn-danger m-2">
+    <input type="checkbox" name="mailing" th:field="*{mailing}" value="true" autocomplete="off"> MAILING
+  </label>
+ </div>
+ <div class="btn-group btn-group-toggle required" data-toggle="buttons">
+  <label class="btn btn-success m-2">
+    <input type="radio" value="true" th:field="*{standard}"  name="standardowy" autocomplete="off" checked> Standardowy - stały
+  </label>
+  <label class="btn btn-success m-2">
+    <input type="radio" value="false" name="niestandardowy" th:field="*{standard}" autocomplete="off" > Niestandardowy
+  </label>
+</div>	
+	</div>
+
+</div>
+
+<div class="row m-2 p-3">
+	<div class="col-12 text-center h3 mx-auto text-dark">Cykliczność:</div>
+</div>
+
+<div class="row m-2 p-3">	
+	<div class="col-6 text-center mx-auto"> 
+		
+		<div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <label class="btn btn-light m-2">
+    <input type="radio" name="options" value="1" th:field="*{cykl}" onClick="uncheck();uncheck2();" id="option1"> Codziennie
+  </label>
+  <label class="btn btn-light m-2 ">
+    <input type="radio" name="options" value="2" th:field="*{cykl}" onClick="uncheck2();" id="option2" autocomplete="off"> Poszczególne dni tygodnia
+  </label>
+  <label class="btn btn-light m-2">
+    <input type="radio" name="options" value="3" th:field="*{cykl}" onClick="uncheck();" id="option3" autocomplete="off"> Spodziewany zakres
+  </label>
+</div>
+		
+	</div>
+</div>
+
+
+<script>
+
+
+
+
+function klik()
+{
+
+	
+	if(document.getElementById("option1").checked)
+		{
+			$("#zakres").hide();
+			$("#dniTygodnia").hide();
+		}
+	if(document.getElementById("option2").checked)
+		{
+			$("#zakres").hide();
+			$("#dniTygodnia").show();
+		}
+	if(document.getElementById("option3").checked)
+		{
+			$("#dniTygodnia").hide();
+			$("#zakres").show();
+		}
+	
+}
+
+
+$("#option2").click(function() {
+
+	$("#zakres").hide();
+	$("#dniTygodnia").show();
+	
+ });
+
+
+$("#option3").click(function() {
+
+	$("#dniTygodnia").hide();
+	$("#zakres").show();
+	
+	document.getElementById("dni").checked = false;
+ });
+
+$("#option1").click(function(){
+
+	$("#zakres").hide();
+	$("#dniTygodnia").hide();
+
+	document.getElementById("dni").checked = false;
+});
+
+</script>
+
+
+<script>
+
+
+	function val()
+	{
+		document.getElementById("option1").value="codziennie";
+	}
+	function uncheck()
+	{
+		if(document.getElementById("poniedzialek").checked==true)
+		{
+			document.getElementById("poniedzialek").click();	
+		}
+		
+		if(document.getElementById("wtorek").checked==true)
+		{
+			document.getElementById("wtorek").click();	
+		}
+		
+		if(document.getElementById("sroda").checked==true)
+		{
+			document.getElementById("sroda").click();	
+		}
+		
+		if(document.getElementById("czwartek").checked==true)
+		{
+			document.getElementById("czwartek").click();	
+		}
+		
+		if(document.getElementById("piatek").checked==true)
+		{
+			document.getElementById("piatek").click();	
+		}
+		
+	}
+
+	function uncheck2()
+	{
+	
+		document.getElementById("zakres2").value = null ; 
+		document.getElementById("poniedzialek").checked=false;
+		document.getElementById("wtorek").checked=false;
+		document.getElementById("sroda").checked=false;
+		document.getElementById("czwartek").checked=false;
+		document.getElementById("piatek").checked=false;
+		
+	}
+
+
+
+
+</script>
+<div class="row m-2 p-3">
+	<div class="col-12 mx-auto text-center">
+	
+		<div id="dniTygodnia" style="display:none;" class="text-dark">
+		
+	<div class="btn-group btn-group-toggle" data-toggle="buttons" >
+		  <label class="btn btn-success m-2">
+		    <input type="checkbox" value="true" id="poniedzialek" th:field="*{poniedzialek}" autocomplete="off"> PONIEDZIAŁEK
+		  </label>
+		  <label class="btn btn-success m-2">
+		    <input type="checkbox" value="true"  id="wtorek" th:field="*{wtorek}" autocomplete="off"> WTOREK
+		  </label>
+		  <label class="btn btn-success m-2">
+		    <input type="checkbox" value="true" th:field="*{sroda}" id="sroda" name="sroda" autocomplete="off"> ŚRODA
+		  </label>
+		  <label class="btn btn-success m-2">
+		    <input type="checkbox" value="true"  th:field="*{czwartek}" id="czwartek" name="czwartek" autocomplete="off"> CZWARTEK
+		  </label>
+		  <label class="btn btn-success m-2">
+		    <input type="checkbox" value="true" th:field="*{piatek}" id="piatek" name="piatek" autocomplete="off"> PIĄTEK
+		  </label>
+	</div>	
+		
+
+		</div>
+		
+		<div id="zakres" style="display:none;" class="text-dark">
+		
+		<span th:text="'Podaj zakres dni'" class="h6"></span>
+		<br>
+		<input type="text" id="zakres2" placeholder="Przykład: 1-6" th:field="*{zakresy}">
+		<br>
+		<span th:text="'Cały miesiąc : 1-31'" ></span>
+	<div class="row mx-auto mt-4">
+
+	</div>
+		</div>
+	
+	</div>
+
+</div>
+<div class="row m-2 p-3">
+	<div class="col-6 text-right mx-auto text-dark">Godzina wykonania:</div>
+	<div class="col-6 text-left mx-auto"><input type="time" name="time" class="form-control col-4" th:field="*{godzinaMax}" value="09:00"/></div>
+</div>
+
+<div class="row m-2 p-3">
+	<div class="col-6 text-right mx-auto text-dark">Główny operator:</div>
+	<div class="col-6 text-left mx-auto">   
+<select id="glowny" th:field="*{glowny}" class="form-control col-4" required>
+  	  	<option value="">Wybierz</option> 
+    	<option th:each="marki : ${glowny}" th:value="${marki.login}" th:text="${marki}"></option>
+    </select>
+	</div>
+</div>
+
+<div class="row m-2 p-3">
+	<div class="col-6 text-right mx-auto text-dark">Zastępca:</div>
+	<div class="col-6 text-left mx-auto"><select id="glowny" th:field="*{zastepca1}" class="form-control col-4" required>
+  	  	<option value="">Wybierz</option> 
+    	<option th:each="marki : ${glowny}" th:value="${marki.login}" th:text="${marki}"></option>
+    </select></div>
+</div>
+
+<div class="row m-2">
+	<div class="col-6 text-right mx-auto text-dark">Manual:</div>
+	<div class="col-6 text-left mx-auto"><input type="file" name="manual"></div>
+</div>
+<div class="row p-3 mx-auto">
+<div class="col-6 mx-auto">
+<div class="md-form amber-textarea active-amber-textarea mx-auto">
+  <i class="fas fa-angle-double-right prefix"></i>
+  <textarea id="form21" class="md-textarea form-control" name="opis" th:field="*{opis}" style="color:black;" rows="7"></textarea>
+  <label for="form21">Opis...</label>
+</div>
+</div>
+</div>
+
+
+<div class="row m-2">
+		<button type="submit" class="btn bg-dark mx-auto"><span th:text="${button}"></span></button>
+</div>
+
+
+<div class="row col-12 p-5"></div>
+</form>
+</main>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+<div class="footer fixed-bottom bg-dark">
+
+		<p class="text-right text-white text-justify mr-3" style="font-size:12px;"><br>© PROJEKTY Powered by EDC. (Rafał Jadczak tel. 223)</p>
+
+</div>
+</body>
+</html>

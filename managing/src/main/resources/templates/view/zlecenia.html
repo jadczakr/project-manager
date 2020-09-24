@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"  xmlns:th="http://www.thymeleaf.org" >
+<head>
+<title>Project Manager</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+  <link rel="icon" th:href="@{~/images/favicon.ico}" type="image/png">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" th:href="@{~/bootstrap/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{~/bootstrap/css/_glyphicons.css}">
+  <!-- Material Design Bootstrap -->
+   <link rel="stylesheet" th:href="@{~/css/mdb.min.css}">
+<link rel="stylesheet" th:href="@{~/css/main.css}">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&amp;subset=latin-ext" rel="stylesheet">
+  <script type="text/javascript" th:src="@{js/jquery.min.js}"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" th:src="@{js/popper.min.js}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" th:src="@{js/mdb.min.js}"></script>
+  
+  
+<!--[if lt IE 9]>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+<![endif]-->
+
+<script>
+
+function zegar() {
+	var data = new Date();
+	var godzina = data.getHours();
+	var min = data.getMinutes();
+	var sek = data.getSeconds();
+	var dzien = data.getDate();
+	var miesiac = data.getMonth()+1;
+	var rok = data.getFullYear();
+	 var terazjest = dzien+ "." + miesiac + "." + rok + "<br>"+godzina+
+	((min<10)?":0":":")+min+
+	((sek<10)?":0":":")+sek;
+	document.getElementById("zegarek").innerHTML = terazjest;
+	setTimeout("zegar()", 1000); 
+}	zegar();
+
+
+function parser()
+{
+	
+	var value1 = prompt('Podaj sciezke');
+	document.getElementById('path').value = value1;
+	
+	
+	document.forms["formik"].submit();
+	
+}
+
+
+function parser2()
+{
+	
+	var value2 = prompt('Podaj sciezke');
+	document.getElementById('path2').value = value2;
+	
+	
+	document.forms["formik2"].submit();
+	
+}
+
+function parser3()
+{
+	
+	var value3 = prompt('Podaj sciezke');
+	document.getElementById('path3').value = value3;
+	
+	
+	document.forms["formik3"].submit();
+	
+}
+
+</script>
+</head>
+
+<body onLoad = "zegar();">
+<img th:src="@{~/images/logo3.png}" style="position:absolute;right:0" class="mt-5 p-5" >
+<header>
+
+<nav class="navbar navbar-expand-lg bg-dark">
+
+  <!-- Navbar brand -->
+<a class="navbar-brand text-white font-weight-bold" th:href="@{/daily-zlecenia}">Project manager</a>
+  <!-- Collapse button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Collapsible content -->
+  <div class="collapse navbar-collapse" id="basicExampleNav">
+
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+ <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">Projekty</a>
+        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" th:href="@{/add-project}">Dodaj...</a>
+          <a class="dropdown-item active" th:href="@{/daily-zlecenia}">Dzisiejsze zlecenia</a>
+          <a class="dropdown-item" th:href="@{/moje-zlecenia}">Edytuj moje zlecenia</a>"
+          </div>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">Pracownik</a>
+        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" th:href="@{/urlop}">Dodaj urlop</a>
+          <a class="dropdown-item" th:href="@{/notatka}">Dodaj notatkę</a>
+        </div>
+      </li>
+       
+             <li class="nav-item">
+        <a class="nav-link text-white" th:href="@{/dziennik}">Dziennik</a>
+      </li>
+       
+      <li class="nav-item">
+        <a class="nav-link text-white" th:href="@{/archiwum}">Archiwum</a>
+      </li>
+      
+       <li class="nav-item">
+        <a class="nav-link text-white" href="https://mtt2.edcexpert.pl/" target="_blank">MTT2</a>
+      </li>
+      
+      
+      
+       <li class="nav-item">
+        <a class="nav-link text-white" href="https://kontakty.edcexpert.pl/" target="_blank">Kontakty EDC</a>
+      </li>
+
+
+       <li class="nav-item">
+        <a class="nav-link text-white" href="https://enadawca.edcexpert.pl/" target="_blank">E-nadawca</a>
+      </li>
+    </ul>
+    <span th:text="'Zalogowany jako: ' + ${uzytkownik}" class="text-right mr-3 text-light"></span>
+	<a th:href="@{/logout}">	<span th:text="'Wyloguj'" class="text-right mr-3 font-weight-bold text-white"></span></a>
+
+  </div>
+
+
+</nav>
+</header>
+
+
+<main>
+
+
+<div class="container">
+
+
+<div class="m-2">
+
+<h2 class="h3 text-center font-weight-bold p-0"></h2>
+
+<div class="col-6 mx-auto mt-2 text-center border border-dark rounded text-dark"><h3 class="h4">Dzisiejsze <font style="color:orange;">zlecenia</font></h3></div>
+<div class="col-12 mt-2 text-center text-dark">
+<span id="zegarek"></span></b>
+</div>
+<div class="row">
+</div>
+<div class="row mt-5 text-dark">
+	<div class="col-1" style="font-size:12px;">ID zlecenia</div> <div class="col-2 text-center" style="font-size:12px;"> Firma i nazwa </div> <div class="col-1 text-center" style="font-size:12px;"> Godzina nadejścia</div><div class="col-1 text-center" style="font-size:12px;">Manual</div><div class="col-2 text-center" style="font-size:12px;"> Operacje</div>
+</div>
+	
+	<tr th:each="project: ${projekty}">
+	
+		<div class="row mt-2 border border-light  bg-light text-dark">
+		
+		<div class="col-1 text-left"><span th:text="${project.getId()}" id="ajdi"></span></div><div class="col-2 text-center"><span th:text="${project.firma} + ' ' + ${project.nazwaZlecenia}"></span></div><div class="col-1 text-center"><span th:text="${project.godzinaMax}"></span></div>
+		<div class="col-1 text-center"><div th:if="${project.manualPath != null}"><a th:href="@{/download(id=${project.id})}" class="text-center" ><i class="fa fa-download" style="color:black;"></i></a></div></div>
+			<div class="col-2 text-center"> <form method="POST" th:action="@{/success-done(id=${project.id})}" id="formik" ><input type="hidden" id="path" name="path"></form>
+				
+				 <a><i onClick="parser()" data-toggle="tooltip" data-placement="top" title="ZAAKCEPTOWANO" class="fa fa-check-square" style="color:green;"></i></a><a th:href="@{/yellow(id=${project.id})}" > <i data-toggle="tooltip" data-placement="top" title="W AKCEPTACJI" class="fa fa-exclamation-triangle ml-2" style="color:#b2b500;"></i> </a> <a th:href="@{/error-zlecenia(id=${project.id})}" > <i data-toggle="tooltip" data-placement="top" title="ANULOWANO"  class="fa fa-times ml-2" style="color:red;"></i> 
+				</a></div>
+		<div class="col-2"><a th:href="@{/edit-zlecenie(id=${project.getId()})}"><i class="fa fa-edit text-dark" data-toggle="tooltip" data-placement="top" title="EDYTUJ"></i></a></div><div class="col=2"><span th:if="${project.standard eq false}" class="font-weight-bold" th:text="'NIESTANDARDOWY'"></span></div>
+		
+</div>
+	</tr>
+
+	</tr>
+	<div class="row mt-5 border border-light text-white bg-info">
+	<div class="col-12 text-center"><span th:text="'-----ZASTĘPSTWA-----'" class="text-center font-weight-bold"></span></div>
+	</div>
+	<tr th:each="project: ${zastepstwa}">
+	
+		<div class="row mt-2 border border-light text-white bg-info">
+		
+		<div class="col-1 text-left"><span th:text="${project.id}"></span></div><div class="col-2 text-center"><span th:text="${project.firma} + ' ' + ${project.nazwaZlecenia}"></span></div><div class="col-1 text-center"><span th:text="${project.godzinaMax}"></span></div>
+		<div class="col-1 text-center"><div th:if="${project.manualPath != null}"><a th:href="@{/download(id=${project.id})}" class="text-center" ><i class="fa fa-download" style="color:black;"></i></a></div></div>
+		<div class="col-2 text-center"> <form method="POST" th:action="@{/success-done(id=${project.id})}" id="formik2" ><input type="hidden" id="path2" name="path2"></form>
+		<a><i onClick="parser2()" data-toggle="tooltip" data-placement="top" title="ZAAKCEPTOWANO" class="fa fa-check-square" style="color:green;"></i></a> <a th:href="@{/yellow(id=${project.id})}" > <i data-toggle="tooltip" data-placement="top" title="W AKCEPTACJI"  class="fa fa-exclamation-triangle ml-2" style="color:#b2b500;"></i> </a> <a th:href="@{/error-zlecenia(id=${project.id})}" > <i data-toggle="tooltip" data-placement="top" title="ANULOWANO" class="fa fa-times ml-2" style="color:red;"></i> </a></div>
+		<div class="col-2"></div><div class="col=2"><span th:if="${project.standard eq false}" class="font-weight-bold" th:text="'NIESTANDARDOWY'"></span></div>
+		
+</div>
+	</tr>
+
+		<div class="row mt-5 text-white bg-warning">
+			<div class="col-12 text-center"><span th:text="'-----W AKCEPTACJI-----'" class="text-center font-weight-bold"></span></div>
+		</div>
+		
+		
+	<tr th:each="zawieszone: ${zawieszone}">
+	
+		<div class="row mt-2 border bg-warning text-white">
+		
+		<div class="col-1 text-left"><span th:text="${zawieszone.id}"></span></div><div class="col-2 text-center"><span th:text="${zawieszone.firma} + ' ' + ${zawieszone.nazwaZlecenia}"></span></div><div class="col-2 text-center"><span th:text="${zawieszone.dataDodania} + ' ' + ${zawieszone.godzinaDodania}"></span></div>
+	<div class="col-2 text-center"><span th:text="${zawieszone.status}"></span></div><div class="col-2 text-center">
+	<form method="POST" th:action="@{/change-status(id=${zawieszone.id})}" id="formik3" ><input type="hidden" id="path3" name="path3"></form><a><i onClick="parser3()" data-toggle="tooltip" data-placement="top" title="ZAAKCEPTOWANO" class="fa fa-check-square" style="color:green;"></i></a><a th:href="@{/edit-done(id=${zawieszone.id})}"><i class="ml-3 fa fa-edit text-dark" data-toggle="tooltip" data-placement="top" title="EDYTUJ"></i></a>  <a th:href="@{/undo(id=${zawieszone.id})}"><i class="ml-2 fa fa-undo text-dark" data-toggle="tooltip" data-placement="top" title="COFNIJ ZLECENIE"></i></a></div>
+		<div class="col-2 text-center"><span class="font-weight-bold" th:if="${zawieszone.standard==0}">NIESTANDARDOWE</span></div>
+	</div>
+	</tr>
+
+</div>
+
+
+<div class="text-dark">
+<div class="col-6 mx-auto mt-5 text-center border border-dark rounded"><h3 class="h4">Dzisiejsze <font style="color:green;" >wykonane</font> zlecenia </h3></div>
+
+<div class="row mt-5">
+	<div class="col-1 text-left" style="font-size:12px;">ID Zlecenia <br>wykonanego</div> <div class="col-2 text-center" style="font-size:12px;">Firma i nazwa</div> <div class="col-2 text-center" style="font-size:12px;"> Godzina <br>wykonania</div><div class="col-2 text-center" style="font-size:12px;">Status</div>
+</div>
+<tr th:each="wykonane: ${wykonane}">
+	
+		<span th:switch="${wykonane.status}">
+		
+		<div th:case="ZAAKCEPTOWANO">
+		<div class="row mt-2 border bg-success text-white">
+		
+		<div class="col-1 text-left"><span th:text="${wykonane.id}"></span></div><div class="col-2 text-center"><span th:text="${wykonane.firma} + ' ' + ${wykonane.nazwaZlecenia}"></span></div><div class="col-2 text-center"><span th:text="${wykonane.dataDodania} + ' ' + ${wykonane.godzinaDodania}"></span></div>
+	<div class="col-2 text-center"><span th:text="${wykonane.status}"></span></div><div class="col-2 text-center"> <a th:href="@{/edit-done(id=${wykonane.id})}"><i class="fa fa-edit text-dark" data-toggle="tooltip" data-placement="top" title="EDYTUJ"></i></a>     <a th:href="@{/undo(id=${wykonane.id})}"><i class="fa fa-undo ml-2 text-dark" data-toggle="tooltip" data-placement="top" title="COFNIJ ZLECENIE"></i></a></div><div class="col-2 text-center"><span class="font-weight-bold" th:if="${wykonane.standard==0}">NIESTANDARDOWE</span></div>
+	
+</div>
+</div>
+	
+		<div th:case="ANULOWANO" class="row mt-2 border bg-danger text-white">
+	
+		<div class="col-1 text-left"><span th:text="${wykonane.id}"></span></div><div class="col-2 text-center"><span th:text="${wykonane.firma} + ' ' + ${wykonane.nazwaZlecenia}"></span></div><div class="col-2 text-center"><span th:text="${wykonane.dataDodania} + ' ' + ${wykonane.godzinaDodania}"></span></div>
+	<div class="col-2 text-center"><span th:text="${wykonane.status}"></span></div><div class="col-2 text-center"><a th:href="@{/edit-done(id=${wykonane.id})}" data-toggle="tooltip" data-placement="top" title="EDYTUJ"><i class="fa fa-edit text-dark"></i></a> <a th:href="@{/undo(id=${wykonane.id})}"><i class="fa ml-2 fa-undo text-dark" data-toggle="tooltip" data-placement="top" title="COFNIJ ZLECENIE"></i></a></div><div class="col-2 text-center"><span class="font-weight-bold" th:if="${wykonane.standard==0}">NIESTANDARDOWE</span></div>
+		</div>
+		</tr>
+		</span>
+
+</div>
+	
+</div>
+
+<div class="row col-12 p-5"></div>
+
+</div>
+</main>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<div class="footer fixed-bottom bg-dark">
+
+		<p class="text-right text-white text-justify mr-3" style="font-size:12px;"><br>© PROJEKTY Powered by EDC. (Rafał Jadczak tel. 223)</p>
+
+</div>
+
+</body>
+</html>

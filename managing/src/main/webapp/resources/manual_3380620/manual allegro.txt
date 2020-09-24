@@ -1,0 +1,11 @@
+allegro manual
+zliczamy ilosci na mailu, wszystkie, zwracac uwage na poniedzialek ( zlecenia z weekendu)
+wywalamy wszystko z j:/it_transakcje1/dane/allegro/dzienne_pdf/bazy
+kopiujemy tylko PDFy z j:/it_dane/otomoto/in/200212/
+wrzucamy je do j:/it_transakcje1/dane/allegro/dzienne_pdf/bazy
+
+odpalamy 1_allegro_dzienne_pdf_v2
+sprawdzamy czy sa jakies bledy w konsoli
+jak nie ma to odpalamy kopiowanie plikow
+przed wysylka sprawdzamy na mailu plik automat 
+przed wysylka sprawdzamy czy ilosci sie zgadzaja a w szczegolnosci data nadania ! 

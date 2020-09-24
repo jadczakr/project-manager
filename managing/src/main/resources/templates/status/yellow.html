@@ -1,0 +1,170 @@
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"  xmlns:th="http://www.thymeleaf.org" >
+<head>
+<title>Project Manager</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+  <link rel="icon" th:href="@{~/images/favicon.ico}" type="image/png">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" th:href="@{~/bootstrap/css/bootstrap.min.css}">
+  <!-- Material Design Bootstrap -->
+   <link rel="stylesheet" th:href="@{~/css/mdb.min.css}">
+<link rel="stylesheet" th:href="@{~/css/main.css}">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&amp;subset=latin-ext" rel="stylesheet">
+
+  <script type="text/javascript" th:src="@{js/jquery.min.js}"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" th:src="@{js/popper.min.js}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" th:src="@{js/mdb.min.js}"></script>
+  
+  
+<!--[if lt IE 9]>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+<![endif]-->
+
+
+</head>
+
+<body>
+<img th:src="@{~/images/logo3.png}" style="position:absolute;right:0" class="mt-5 p-5" >
+<header>
+
+<nav class="navbar navbar-expand-lg bg-dark">
+
+  <!-- Navbar brand -->
+<a class="navbar-brand text-white font-weight-bold" th:href="@{/daily-zlecenia}">Project manager</a>
+  <!-- Collapse button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Collapsible content -->
+  <div class="collapse navbar-collapse" id="basicExampleNav">
+
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+ <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">Projekty</a>
+        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" th:href="@{/add-project}">Dodaj...</a>
+          <a class="dropdown-item" th:href="@{/daily-zlecenia}">Dzisiejsze zlecenia</a>
+          <a class="dropdown-item" th:href="@{/moje-zlecenia}">Edytuj moje zlecenia</a>"
+          </div>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">Pracownik</a>
+        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" th:href="@{/urlop}">Dodaj urlop</a>
+          <a class="dropdown-item" th:href="@{/notatka}">Dodaj notatkę</a>
+        </div>
+      </li>
+       
+             <li class="nav-item">
+        <a class="nav-link text-white" th:href="@{/dziennik}">Dziennik</a>
+      </li>
+       
+      <li class="nav-item">
+        <a class="nav-link text-white" th:href="@{/archiwum}">Archiwum</a>
+      </li>
+      
+       <li class="nav-item">
+        <a class="nav-link text-white" href="https://mtt2.edcexpert.pl/" target="_blank">MTT2</a>
+      </li>
+      
+      
+      
+       <li class="nav-item">
+        <a class="nav-link text-white" href="https://kontakty.edcexpert.pl/" target="_blank">Kontakty EDC</a>
+      </li>
+
+
+       <li class="nav-item">
+        <a class="nav-link text-white" href="https://enadawca.edcexpert.pl/" target="_blank">E-nadawca</a>
+      </li>
+    </ul>
+    <span th:text="'Zalogowany jako: ' + ${uzytkownik}" class="text-right mr-3 text-light"></span>
+	<a th:href="@{/logout}">	<span th:text="'Wyloguj'" class="text-right mr-3 font-weight-bold text-white"></span></a>
+
+  </div>
+
+
+</nav>
+</header>
+
+
+
+<main>
+
+<div class="container">
+
+
+
+<div class="m-2">
+
+
+
+
+<h2 class="h2 text-center font-weight-bold p-0"></h2>
+
+<form th:action="@{/wykonanie}" method="POST">
+</div>
+<div class="col-6 mx-auto mt-5 text-center border rounded border-dark text-dark"><h4 class="h4">Zatwierdzanie projektu</h4></div>
+<div class="row mt-5 text-dark">
+<div class="col-6 text-right"> ID: </div> <div class="col-6 text-left"><span th:text="${zlecenie.id}" ></span></div>
+<div class="col-6 text-right"> Firma:</div> <div class="col-6 text-left"><span th:text="${zlecenie.firma}"></span></div>
+<div class="col-6 text-right"> Nazwa zlecenia:</div> <div class="col-6 text-left"><span th:text="${zlecenie.nazwaZlecenia}"></span></div>
+<div class="col-6 text-right"> Wykonawca: </div> <div class="col-6 text-left"><span th:text="${zlecenie.glowny}"></span></div>
+<div class="col-6 text-right mt-2"> Status <i class="fa fa-exclamation-triangle" style="color:#b2b500;"></i></div> <div class="col-6 text-left">
+<select id="status" name="status" class="form-control col-5" required>
+  	  	<option value="">Wybierz</option> 
+  	  	<option value="W AKCEPTACJI"> W AKCEPTACJI</option>
+    	</select></div>
+<div class="col-6 text-right mt-3"> Ścieżka do zlecenia:</div><div class="col-6 text-left mt-2"><input type="text" name="path" placeholder="Ścieżka do generacji" class="form-control col-5"></div>
+<div class="col-8 mx-auto">
+
+
+<div class="md-form amber-textarea active-amber-textarea">
+  <i class="fas fa-angle-double-right prefix"></i>
+  <textarea id="form21" class="md-textarea form-control" name="opis" style="color:white;" rows="7"></textarea>
+  <label for="form21">Opis...</label>
+</div>
+
+<a th:href="@{/wykonanie}"><button type="submit" class="btn bg-dark text-center mx-auto rounded">Zrobione!</button></a>
+</div>
+<div class="col-12 border" style="visibility:hidden;">
+
+<input th:value="${zlecenie.id}" name="id">
+<input th:value="${zlecenie.firma}" name="firma">
+<input th:value="${zlecenie.nazwaZlecenia}" name="nazwaZlecenia">
+</form>
+</div>
+</div>
+
+<div class="row col-12 p-5"></div>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<div class="footer fixed-bottom bg-dark">
+
+		<p class="text-right text-white text-justify mr-3" style="font-size:12px;"><br>© PROJEKTY Powered by EDC. (Rafał Jadczak tel. 223)</p>
+
+</div>
+
+</body>
+</html>
