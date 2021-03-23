@@ -21,6 +21,9 @@ BACKEND :
   - Spring data jpa
   - devtools 
   - thymeleaf
+  
+  
+  
 FRONTEND : 
   - html
   - css
